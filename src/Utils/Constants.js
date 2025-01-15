@@ -23,3 +23,12 @@ export const NOW_PLAYING_MOVIES_URL =
 
 export const MOVIE_VIDEO_URL =
   'https://api.themoviedb.org/3/movie/762509/videos?language=en-US';
+
+export const IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/w500/';
+export const TOP_RATED_SERIES_URL = 'https://api.themoviedb.org/3/tv/top_rated';
+export const POPULAR_SERIES_URL = 'https://api.themoviedb.org/3/tv/popular';
+export const TOP_RATED_MOVIES_URL =
+  'https://api.themoviedb.org/3/movie/top_rated';
+
+export const UPCOMING_MOVIES_URL =
+  'https://api.themoviedb.org/3/movie/upcoming';
