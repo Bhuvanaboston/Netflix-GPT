@@ -1,19 +1,15 @@
 import React from 'react';
 import { signOut } from 'firebase/auth';
 import { auth } from '../Utils/Firebase';
-import { useNavigate } from 'react-router-dom';
 const ProfileMenu = ({ onOptionSelect, onMouseEnter, onMouseLeave }) => {
-  const navigate = useNavigate();
   const handleSignOut = () => {
     // Implement sign-out logic here
     signOut(auth)
       .then(() => {
         // Sign-out successful.
-        navigate('/');
       })
       .catch((error) => {
         // An error happened.
-        navigate('/error');
       });
   };
 
