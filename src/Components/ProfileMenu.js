@@ -1,7 +1,11 @@
 import React from 'react';
 import { signOut } from 'firebase/auth';
 import { auth } from '../Utils/Firebase';
+import { useSelector } from 'react-redux';
+
 const ProfileMenu = ({ onOptionSelect, onMouseEnter, onMouseLeave }) => {
+  const isGptViewer = useSelector((store) => store.gpt.showGptSearch);
+
   const handleSignOut = () => {
     // Implement sign-out logic here
     signOut(auth)
@@ -20,18 +24,28 @@ const ProfileMenu = ({ onOptionSelect, onMouseEnter, onMouseLeave }) => {
       onMouseLeave={onMouseLeave} // Hide menu when leaving it
     >
       <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
-        <li
-          style={{ padding: '5px 10px', cursor: 'pointer' }}
-          onClick={() => onOptionSelect('Option 1')}
-        >
-          Option 1
-        </li>
-        <li
-          style={{ padding: '5px 10px', cursor: 'pointer' }}
-          onClick={() => onOptionSelect('Option 2')}
-        >
-          Option 2
-        </li>
+        {isGptViewer && (
+          <>
+            <li
+              style={{ padding: '5px 10px', cursor: 'pointer' }}
+              onClick={() => onOptionSelect('en')}
+            >
+              English
+            </li>
+            <li
+              style={{ padding: '5px 10px', cursor: 'pointer' }}
+              onClick={() => onOptionSelect('tn')}
+            >
+              தமிழ்
+            </li>
+            <li
+              style={{ padding: '5px 10px', cursor: 'pointer' }}
+              onClick={() => onOptionSelect('sp')}
+            >
+              Spanish
+            </li>
+          </>
+        )}
 
         <li
           style={{ padding: '5px 10px', cursor: 'pointer' }}

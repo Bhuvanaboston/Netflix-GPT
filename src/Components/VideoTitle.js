@@ -5,8 +5,8 @@ import InfoIcon from '@mui/icons-material/Info';
 const VideoTitle = ({ title, overview }) => {
   return (
     <div className="pt-[20%] px-12 absolute bg-gradient-to-r  from-black text-white w-screen aspect-video">
-      <h1 className="text-6xl  font-bold w-1/2">{title}</h1>
-      <p className="py-6 text-lg w-1/4">{overview}</p>
+      <h1 className="text-4xl  font-bold w-1/2">{title}</h1>
+      <p className="py-6 text-lg w-1/2">{overview}</p>
       <div>
         <Button
           variant="contained"

@@ -27,12 +27,16 @@ const VideoBackground = ({ movieId }) => {
         referrerPolicy="strict-origin-when-cross-origin"
       ></iframe>
       {/* Mute/Unmute Button */}
-      <div className="absolute top-20 right-4">
+      <div className="absolute bottom-20 right-10 ">
         <IconButton
           onClick={toggleMute}
           style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)', color: 'white' }}
         >
-          {isMuted ? <VolumeOffIcon /> : <VolumeUpIcon />}
+          {isMuted ? (
+            <VolumeOffIcon fontSize="large" />
+          ) : (
+            <VolumeUpIcon fontSize="large" />
+          )}
         </IconButton>
       </div>
     </div>
