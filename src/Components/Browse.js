@@ -21,7 +21,6 @@ const Browse = () => {
   return (
     <div>
       <Header />
-      {isGptViewer && <GptSearchPage />}
       <MainContainer />
       <SecondaryContainer />
     </div>

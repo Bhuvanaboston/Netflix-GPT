@@ -3,27 +3,67 @@ import InputBase from '@mui/material/InputBase';
 import Paper from '@mui/material/Paper';
 import SearchIcon from '@mui/icons-material/Search';
 import IconButton from '@mui/material/IconButton';
-import { LOGIN_BG } from '../Utils/Constants';
 import lang from '../Utils/langConstants';
-import { useSelector } from 'react-redux';
-
+import { useSelector, useDispatch } from 'react-redux';
+import openAIClient from '../Utils/openAIClient';
+import ErrorPage from './ErrorPage';
+import { API_OPTIONS } from '../Utils/Constants';
+import { addGptMovieResullts } from '../Utils/gptSlice';
+import ShimmerLoader from './ShimmerLoader';
 const GptSearchBar = () => {
   const [searchQuery, setSearchQuery] = useState('');
+  const [isLoading, setIsLoading] = useState(false); // Loading state
+  const dispatch = useDispatch();
+
   const configLang = useSelector((store) => store.configSlice.language);
 
   const handleInputChange = (event) => {
     setSearchQuery(event.target.value);
   };
 
-  const handleSearch = () => {
-    console.log('Searching for:', searchQuery);
+  const fetchMovieFromTMDB = async (movie) => {
+    const data = await fetch(
+      'https://api.themoviedb.org/3/search/movie?query=' +
+        movie +
+        '&include_adult=false&language=en-US&page=1',
+      API_OPTIONS
+    );
+    const json = await data.json();
+    return json.results;
+  };
+
+  const handleSearch = async () => {
+    setIsLoading(true); // Set loading state to true
+    try {
+      const gptQuery =
+        'Act as a movie recommendation system and suggest some movies for the query : ' +
+        searchQuery +
+        ' ,only give names of 5 movies, comma separated like the following : GOAT, Goa, Theri, Thuppaki, Ghilli';
+      const gptResults = await openAIClient.chat.completions.create({
+        messages: [{ role: 'user', content: gptQuery }],
+        model: 'gpt-3.5-turbo',
+      });
+      if (!gptResults.choices) {
+        console.error('No results found from GPT');
+        <ErrorPage errorCode="404" errorMessage="Page Not Found" />;
+        return;
+      }
+      const gptMovies = gptResults?.choices[0]?.message?.content.split(',');
+      const promiseArray = gptMovies.map((movie) => fetchMovieFromTMDB(movie));
+      const movieData = await Promise.all(promiseArray);
+      dispatch(
+        addGptMovieResullts({ movieNames: gptMovies, movieResults: movieData })
+      );
+    } catch (error) {
+      console.error('Error fetching data:', error);
+      <ErrorPage errorCode="404" errorMessage="Error fetching data: " error />;
+    } finally {
+      setIsLoading(false); // Set loading state to false
+    }
   };
 
   return (
-    <div className="flex items-center justify-center h-screen ">
-      <div className="absolute">
-        <img src={LOGIN_BG} alt="background-image" />
-      </div>
+    <div className="flex items-center justify-center h-96">
       <Paper
         component="form"
         onSubmit={(e) => e.preventDefault()}
@@ -46,6 +86,11 @@ const GptSearchBar = () => {
           <SearchIcon />
         </IconButton>
       </Paper>
+      {isLoading && (
+        <div className="absolute top-0 left-0 right-0 bottom-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+          <ShimmerLoader />
+        </div>
+      )}
     </div>
   );
 };

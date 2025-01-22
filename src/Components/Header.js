@@ -37,6 +37,12 @@ const Header = () => {
   };
   const handleGptSearchClick = () => {
     dispatch(toggleGptSearchView());
+
+    if (!isGptViewer) {
+      navigate('/gptsearch');
+    } else {
+      navigate('/browse');
+    }
   };
 
   useEffect(() => {
@@ -53,7 +59,9 @@ const Header = () => {
             photoURL: photoURL,
           })
         );
-        navigate('/browse');
+        if (!isGptViewer) {
+          navigate('/browse');
+        }
       } else {
         // User is signed out
         dispatch(removeUser());
