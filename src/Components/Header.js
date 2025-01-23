@@ -72,12 +72,12 @@ const Header = () => {
     return () => unsubscribe();
   }, []);
   return (
-    <div className="absolute  w-screen px-20 py-2 bg-gradient-to-b from-black z-10 flex justify-between">
+    <div className="absolute  w-screen px-20 py-2 bg-gradient-to-b from-black z-10 flex flex-col md:flex-row  md:justify-between ">
       <div>
-        <img className="w-52" src={NETFLIX_LOGO} alt="logo" />
+        <img className="w-52 mx-auto md:mx-0" src={NETFLIX_LOGO} alt="logo" />
       </div>
       {user && (
-        <div className="flex  gap-4 m-5">
+        <div className="flex justify-between gap-4 m-5">
           <div>
             <Button
               className="!bg-red-700  !text-white rounded-md py-3 px-6 text-lg"

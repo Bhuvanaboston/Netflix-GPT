@@ -4,9 +4,9 @@ import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import InfoIcon from '@mui/icons-material/Info';
 const VideoTitle = ({ title, overview }) => {
   return (
-    <div className="pt-[20%] px-12 absolute bg-gradient-to-r  from-black text-white w-screen aspect-video">
-      <h1 className="text-4xl  font-bold w-1/2">{title}</h1>
-      <p className="py-6 text-lg w-1/2">{overview}</p>
+    <div className="pt-[20%] px-3 md:px-12 absolute bg-gradient-to-r  from-black text-white w-screen aspect-video">
+      <h1 className="text-xl md:text-4xl  font-bold w-1/2">{title}</h1>
+      <p className=" hidden md:inline-block py-6 text-lg w-1/2">{overview}</p>
       <div>
         <Button
           variant="contained"
@@ -34,7 +34,7 @@ const VideoTitle = ({ title, overview }) => {
               backgroundColor: '#222222', // Darker shade on hover (black-ish)
             },
           }}
-          className="!ml-5"
+          className="  !hidden !md:inline-block !ml-5"
         >
           More Info
         </Button>

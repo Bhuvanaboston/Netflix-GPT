@@ -15,8 +15,8 @@ const MovieList = ({ title, movies }) => {
     scrollRef.current.scrollBy({ left: 300, behavior: 'smooth' });
   };
   return (
-    <div className="p-6 text-white text-xl font-bold">
-      <h1>{title}</h1>
+    <div className="p-6 text-white font-bold">
+      <h1 className="text-lg md:text-xl">{title}</h1>
       <div className="relative">
         <button
           onClick={scrollLeft}

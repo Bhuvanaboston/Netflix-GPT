@@ -27,18 +27,14 @@ const MainContainer = () => {
   const currentMovie = movies[activeIndex];
 
   return (
-    <div className="relative w-screen h-screen">
-      {/* Video Title */}
+    <div className="relative w-screen h-screen pt-[50%] bg-black md:pt-0">
       <VideoTitle
         title={currentMovie.original_title}
         overview={currentMovie.overview}
       />
 
-      {/* Video Background */}
-      {/* Pass a unique key to force re-render */}
       <VideoBackground key={currentMovie.id} movieId={currentMovie.id} />
 
-      {/* Navigation Buttons */}
       <div className="absolute top-1/2 transform -translate-y-1/2 left-4">
         <IconButton
           onClick={handlePrevious}

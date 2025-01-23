@@ -63,11 +63,11 @@ const GptSearchBar = () => {
   };
 
   return (
-    <div className="flex items-center justify-center h-96">
+    <div className="flex items-center justify-center h-96 pt-[30%] md:p-0">
       <Paper
         component="form"
         onSubmit={(e) => e.preventDefault()}
-        className="flex items-center p-2 w-[600px] !bg-black !text-white bg-opacity-10 relative z-50 border border-b-2 rounded border-spacing-2 border-gray-700"
+        className="flex items-center p-2 w-full md:w-1/2 !bg-black !text-white bg-opacity-10 relative z-50 border border-b-2 rounded border-spacing-2 border-gray-700"
       >
         <InputBase
           sx={{ ml: 1, flex: 1 }}

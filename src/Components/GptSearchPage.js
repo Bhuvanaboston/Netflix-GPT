@@ -6,14 +6,20 @@ import { LOGIN_BG } from '../Utils/Constants';
 
 const GptSearchPage = () => {
   return (
-    <div>
+    <>
       <div className="fixed -z-10">
-        <img src={LOGIN_BG} alt="background-image" />
+        <img
+          className="h-screen object-cover md:h-auto md:object-contain"
+          src={LOGIN_BG}
+          alt="background-image"
+        />
       </div>
-      <Header />
-      <GptSearchBar />
-      <GptMovieSuggestion />
-    </div>
+      <div>
+        <Header />
+        <GptSearchBar />
+        <GptMovieSuggestion />
+      </div>
+    </>
   );
 };
 
